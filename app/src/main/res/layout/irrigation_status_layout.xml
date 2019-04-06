@@ -66,6 +66,18 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:background="@drawable/line_dash"
+                android:gravity="end"
+                android:text="30cm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sensor1TextView"
+                app:layout_constraintTop_toBottomOf="@id/sensor_1_guideline" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:background="@drawable/line_dash"
                 android:layout_marginBottom="@dimen/default_margin"
@@ -87,18 +99,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/sensor2TextView"
                 app:layout_constraintBottom_toTopOf="@id/sensor_2_guideline" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:background="@drawable/line_dash"
-                android:gravity="end"
-                android:text="60cm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/sensor1TextView"
-                app:layout_constraintTop_toBottomOf="@id/sensor_1_guideline" />
 
 
             <androidx.constraintlayout.widget.Guideline

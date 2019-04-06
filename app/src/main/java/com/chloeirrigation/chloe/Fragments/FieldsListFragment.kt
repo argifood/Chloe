@@ -89,11 +89,11 @@ class FieldsListFragment : Fragment() {
 
         // Dummy data
         val fields = arrayListOf(
-            Field("Field 1", 0, 0, "5ca79c64d86170003e090774", R.drawable.kopaida_1_field),
-            Field("Field 2", 0, 0, "5ca79d53d86170001b09072c", R.drawable.kopaida_2_field),
-            Field("Field 3", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur),
-            Field("Field 4", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur),
-            Field("Field 5", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur)
+            Field("Field 1", 0, 0, "5ca79c64d86170003e090774", R.drawable.kopaida_1_field, 3, 30, 27, 2.0),
+            Field("Field 2", 0, 0, "5ca79d53d86170001b09072c", R.drawable.kopaida_2_field, 1,29, 35, 1.3),
+            Field("Field 3", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur, 0, 22, 30, 1.2),
+            Field("Field 4", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur, 0, 22, 30, 1.2),
+            Field("Field 5", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur, 0, 22, 30, 1.2)
         )
         // TODO: 06/04/2019 Move these to a RecyclerView loaded form the server
     }

@@ -1,6 +1,7 @@
 package com.chloeirrigation.chloe.Fragments
 
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,7 +21,10 @@ import com.chloeirrigation.chloe.Helpers.listValue
 import com.chloeirrigation.chloe.Helpers.stringValue
 import com.chloeirrigation.chloe.Objects.FieldData
 import com.chloeirrigation.chloe.R
+import kotlinx.android.synthetic.main.irrigation_status_layout.*
 import me.akatkov.kotlinyjson.JSON
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
@@ -58,13 +62,9 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         val url =
             "http://api.agromonitoring.com/agro/1.0/image/search?start=$startTime&end=$endTime&polyid=${field.polyId}&appid=${ChloeApp.agroApiKey}"
 
-        Log.d(TAG, "getDataFromApi: Sending request to: $url")
-        url.httpGet()
-            .responseString { request, response, result ->
-//            .responseJson { request, response, result ->
-                val jsonStirng = result.get()
-
-                val jsonArray = JSON(jsonStirng)
+        url.httpGet().responseString { request, response, result ->
+                val jsonString = result.get()
+                val jsonArray = JSON(jsonString)
 
                 if (jsonArray.listValue.isNotEmpty()) {
                     fieldData.clear()
@@ -73,7 +73,7 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
                 for (day in jsonArray.listValue) {
                     val jImage = day["image"]
 
-                    val timestamp = day["dt"].intValue
+                    val timestamp = day["dt"].intValue * 1000L
                     val trueColor = jImage["truecolor"].stringValue
                     val falseColor = jImage["falsecolor"].stringValue
                     val ndvi = jImage["ndvi"].stringValue
@@ -85,24 +85,44 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
                 Log.v(TAG, "Field data parsed: ${fieldData.size}")
 
+                preloadImages()
+
                 dateSeekBar.max = fieldData.size
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    dateSeekBar.min = 1
+                }
+
+                segmentedPositionChanged(segmentedControl.selectedAbsolutePosition)
+                updateDateTextView()
             }
+    }
 
+    private fun preloadImages() {
+        val picasso = Picasso.get()
+        fieldData.forEach {
+            picasso.load(it.trueColorUrl).fetch()
+        }
 
-//            .responseString { request, response, result ->
-//                when (result.component2()) {
-//                    is Result.Failure -> {
-//                        val ex = result.getException()
-//                    }
-//                    is Result.Success -> {
-//                        val data = result.get()
-//                    }
-//                }
-//            }
+        fieldData.forEach {
+            picasso.load(it.falseColorUrl).fetch()
+            picasso.load(it.ndviUrl).fetch()
+            picasso.load(it.eviUrl).fetch()
+        }
     }
 
     private fun setupRoot() {
+        val drawable = when (field.devPeriod) {
+            1-> R.drawable.ic_root_2
+            2-> R.drawable.ic_root_3
+            3-> R.drawable.ic_root_4
+            4-> R.drawable.ic_root_5
+            else -> R.drawable.ic_root_1 // 0 and others
+        }
 
+        rootImageView.setImageDrawable(context?.getDrawable(drawable))
+        sensor1TextView.text = field.sensor1Value
+        sensor2TextView.text = field.sensor2Value
+        sensorNutrientsTextView.text = field.sensorNutrientsValue
     }
 
     private fun setupField() {
@@ -118,7 +138,9 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     private fun segmentedPositionChanged(position: Int) {
-        Log.d(TAG, "setupField: Selected position: $position")
+        if (position >= fieldData.size) {
+            return
+        }
 
         when (position) {
             1 -> loadFalseColor()
@@ -129,31 +151,29 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     private fun loadTrueColor() {
-        val url = fieldData[dateSeekBar.progress].trueColorUrl
+        val url = fieldData[dateSeekBar.progress-1].trueColorUrl
         loadSatelliteImageFrom(url)
     }
 
     private fun loadFalseColor() {
-        val url = fieldData[dateSeekBar.progress].falseColorUrl
+        val url = fieldData[dateSeekBar.progress-1].falseColorUrl
         loadSatelliteImageFrom(url)
     }
 
     private fun loadNDVI() {
-        val url = fieldData[dateSeekBar.progress].ndviUrl
+        val url = fieldData[dateSeekBar.progress-1].ndviUrl
         loadSatelliteImageFrom(url)
     }
 
 
     private fun loadEVI() {
-        val url = fieldData[dateSeekBar.progress].eviUrl
+        val url = fieldData[dateSeekBar.progress-1].eviUrl
         loadSatelliteImageFrom(url)
     }
 
     private fun loadSatelliteImageFrom(url: String) {
-        Log.d(TAG, "loadSatelliteImageFrom: Loading image form $url")
-//        Picasso.with(context).load(url).into(fieldSateliteImage)
+//        Log.d(TAG, "loadSatelliteImageFrom: Loading image form $url")
         Picasso.get().load(url).into(fieldSateliteImage)
-//        ImageLoader.getInstance().displayImage(url, fieldSateliteImage)
     }
 
 
@@ -162,6 +182,13 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+        if (progress == 0) {
+            seekBar.progress = 1
+        }
+
+        updateDateTextView()
+
+        segmentedPositionChanged(segmentedControl.selectedAbsolutePosition)
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -170,8 +197,16 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         val days = fieldData.size - seekBar.progress
         Log.d(TAG, "onStopTrackingTouch: Progress changed: $days | Prog: ${seekBar.progress}")
 
-        segmentedPositionChanged(segmentedControl.selectedAbsolutePosition)
+//        segmentedPositionChanged(segmentedControl.selectedAbsolutePosition)
         // TODO: 06/04/2019 Load current image here
+    }
+
+    private fun updateDateTextView() {
+        if (fieldData.size > dateSeekBar.progress) {
+            val date = Date(fieldData[dateSeekBar.progress].timestamp)
+            val format = SimpleDateFormat("EEE dd/MM/yyyy")
+            satelliteDateTextView.text = format.format(date)
+        }
     }
 
 

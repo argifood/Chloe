@@ -8,4 +8,4 @@ import kotlinx.android.parcel.Parcelize
  * Copyright © 2019 Chloe Irrigation Systems. All rights reserved.
  */
 @Parcelize
-class FieldData(var timestamp: Int, var trueColorUrl: String, var falseColorUrl: String, var ndviUrl: String, var eviUrl: String): Parcelable
+class FieldData(var timestamp: Long, var trueColorUrl: String, var falseColorUrl: String, var ndviUrl: String, var eviUrl: String): Parcelable

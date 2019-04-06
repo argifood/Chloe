@@ -45,12 +45,10 @@ dependencies {
     implementation 'me.akatkov.kotlinyjson:kotlinyjson:0.3.2'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
-//    implementation 'com.squareup.picasso:picasso:2.5.2'
 
-//    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-
-//    implementation 'info.hoang8f:android-segmented:1.0.6'
     implementation 'com.github.RobertApikyan:SegmentedControl:1.1.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
 
 androidExtensions {

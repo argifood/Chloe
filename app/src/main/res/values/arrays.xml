@@ -7,12 +7,16 @@
         <item>EVI</item>
     </string-array>
 
-    <string-array name="stats_types_array_data">
-        <!--TODO: add the values here-->
-        <item>True Color</item>
-        <item>False Color</item>
-        <item>NDVI</item>
-        <item>EVI</item>
+    <string-array name="stats_sensors_array_data">
+        <item>Moisture</item>
+        <item>Temperature</item>
+        <item>EC</item>
+    </string-array>
+
+    <string-array name="stats_weather_array_data">
+        <item>Temperature</item>
+        <item>Humidity</item>
+        <item>Precipitation</item>
     </string-array>
 
 
