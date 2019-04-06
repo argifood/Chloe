@@ -1,3 +1,3 @@
 # Chloe
 
-This it the Chloe repo for the Agrifood hackathon.
+This is the Chloe repo for the Agrifood hackathon.
