@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Chloe</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="information">Information</string>
+    <string name="calendar">Calendar</string>
+    <string name="stats">Stats</string>
+    <string name="title_activity_field">FieldActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="weather_forecast">Weather Forecast</string>
+    <string name="field_information">Field Information</string>
+    <string name="square_meters">5000 m<sup>2</sup></string>
+    <string name="field_image">Field Satellite View</string>
+    <string name="ndvi_image">NDVI Image</string>
+    <string name="irrigation_status">Irrigation Status</string>
+    <string name="next_irrigation_example">In <b>2 days</b> •\nTuesday 09/04/2019</string>
+    <string name="example_last_rain">12 days ago •\nTuesday 26/03/2019</string>
+    <string name="example_last_irrigation">4 days ago •\nWednesday 03/04/2019</string>
+    <string name="last_irrigation">Last Irrigation:</string>
+    <string name="next_irrigation">Next Irrigation:</string>
+    <string name="last_rainfall">Last Rainfall:</string>
+</resources>

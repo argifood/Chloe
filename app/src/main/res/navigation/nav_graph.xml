@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fieldsListFragment">
+
+    <fragment
+        android:id="@+id/fieldsListFragment"
+        android:name="com.chloeirrigation.chloe.FieldsListFragment"
+        android:label="George"
+        tools:layout="@layout/fragment_fields_list">
+        <action
+            android:id="@+id/action_fieldsListFragment_to_fieldFragment"
+            app:destination="@id/fieldFragment"
+            app:enterAnim="@anim/enter_slide_left"
+            app:exitAnim="@anim/exit_slide_left"
+            app:popEnterAnim="@anim/pop_enter_slide_right"
+            app:popExitAnim="@anim/pop_exit_slide_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldFragment"
+        android:name="com.chloeirrigation.chloe.FieldContainerFragment"
+        android:label="fragment_field"
+        tools:layout="@layout/fragment_field" >
+        <argument
+            android:name="fieldName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fieldFragment_to_statsFragment"
+            app:destination="@id/stats_fragment" />
+        <action
+            android:id="@+id/action_fieldFragment_to_infoFragment"
+            app:destination="@id/info_fragment" />
+        <action
+            android:id="@+id/action_fieldFragment_to_calendarFragment"
+            app:destination="@id/calendar_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stats_fragment"
+        android:name="com.chloeirrigation.chloe.StatsFragment"
+        android:label="fragment_stats"
+        tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/info_fragment"
+        android:name="com.chloeirrigation.chloe.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/calendar_fragment"
+        android:name="com.chloeirrigation.chloe.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+</navigation>
