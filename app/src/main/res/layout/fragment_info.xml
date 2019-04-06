@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".InfoFragment">
+
+        <!-- Weather Card -->
+        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/weather_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CardTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="@string/weather_forecast" />
+
+                <!-- Separator View -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cardHeaderSeparatorGrey" />
+
+                <!-- TODO: Replace the image with an actual weather layout -->
+                <ImageView
+                    android:id="@+id/weather_card_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/weather_placeholder" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <!-- /Weather Card -->
+
+        <!-- Root and Irrigation card -->
+        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/irrigation_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CardTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="@string/irrigation_status" />
+
+                <!-- Separator View -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cardHeaderSeparatorGrey" />
+
+                <!-- TODO: Replace the image with an actual weather layout -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin">
+
+
+                    <!--TODO: add the root and irrigaiton here!!!-->
+                    <ImageView
+                        android:id="@+id/rootIcon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_clear_grey_24dp"
+                        card_view:layout_constraintLeft_toLeftOf="parent"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toTopOf="parent" />
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <!-- /Root and Irrigation card -->
+
+
+        <!-- Field Card -->
+        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/field_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/CardTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="@string/field_information" />
+
+                <!-- Separator View -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cardHeaderSeparatorGrey" />
+
+                <!-- TODO: Replace the image with an actual weather layout -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin">
+
+                    <ImageView
+                        android:id="@+id/fieldIcon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_clear_grey_24dp"
+                        card_view:layout_constraintLeft_toLeftOf="parent"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fieldNameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Kopaida Wheat Field"
+                        android:textStyle="bold"
+                        card_view:layout_constraintBottom_toBottomOf="@+id/fieldIcon"
+                        card_view:layout_constraintStart_toEndOf="@+id/fieldIcon"
+                        card_view:layout_constraintTop_toTopOf="@+id/fieldIcon" />
+
+                    <TextView
+                        android:id="@+id/fieldSizeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/square_meters"
+                        card_view:layout_constraintBottom_toBottomOf="@+id/fieldIcon"
+                        card_view:layout_constraintEnd_toEndOf="parent"
+                        card_view:layout_constraintHorizontal_bias="1.0"
+                        card_view:layout_constraintStart_toEndOf="@+id/fieldNameTextView"
+                        card_view:layout_constraintTop_toTopOf="@+id/fieldIcon" />
+
+                    <LinearLayout
+                        android:id="@+id/cropTypeLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/default_margin"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/fieldIcon">
+
+                        <ImageView
+                            android:id="@+id/cropTypeIcon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_clear_grey_24dp"
+                            card_view:layout_constraintLeft_toLeftOf="parent"
+                            card_view:layout_constraintStart_toStartOf="parent"
+                            card_view:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/cropTypeTitleTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/default_margin"
+                            android:text="Planted Crop: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/cropTypeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/default_margin"
+                            android:text="Wheat"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cropPlantedLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/default_margin"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@+id/cropTypeLayout">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_clear_grey_24dp"
+                            card_view:layout_constraintLeft_toLeftOf="parent"
+                            card_view:layout_constraintStart_toStartOf="parent"
+                            card_view:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/default_margin"
+                            android:text="Planted Date: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/cropPlantedDateTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/default_margin"
+                            android:text="02/04/2019"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/satelliteTitlesLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin_double"
+                        android:orientation="horizontal"
+                        card_view:layout_constraintTop_toBottomOf="@id/cropPlantedLayout">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/field_image" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/ndvi_image" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/sateliteImageLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        card_view:layout_constraintTop_toBottomOf="@id/satelliteTitlesLayout">
+
+                        <ImageView
+                            android:id="@+id/fieldImage"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/satellite_field_image_height"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="@dimen/default_margin"
+                            android:layout_weight="1"
+                            android:src="@drawable/kopaida_1_color" />
+
+                        <ImageView
+                            android:id="@+id/ndviImage"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/satellite_field_image_height"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/kopaida_1_ndvi" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/fieldImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/satellite_field_image_height_large"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/kopaida_1_field"
+                        card_view:layout_constraintBottom_toBottomOf="parent"
+                        card_view:layout_constraintEnd_toEndOf="parent"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@id/sateliteImageLayout" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
