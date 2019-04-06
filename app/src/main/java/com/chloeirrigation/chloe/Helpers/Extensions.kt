@@ -1,6 +1,8 @@
 package com.chloeirrigation.chloe.Helpers
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.text.Editable
@@ -9,10 +11,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.graphics.Color
+import com.applandeo.materialcalendarview.EventDay
 import com.chloeirrigation.chloe.BuildConfig
 import com.chloeirrigation.chloe.R
 import me.akatkov.kotlinyjson.JSON
+import java.util.*
 
 
 /**
@@ -110,3 +113,12 @@ val JSON.listValue: List<JSON>
         return this.list ?: listOf()
     }
 
+@SuppressLint("RestrictedApi")
+fun EventDay.getIconImageDrawable(): Drawable {
+        return this.imageDrawable as Drawable
+    }
+
+@SuppressLint("RestrictedApi")
+fun EventDay.setCalendar(calendar: Calendar): EventDay {
+    return EventDay(this.calendar, this.imageDrawable as? Drawable)
+}

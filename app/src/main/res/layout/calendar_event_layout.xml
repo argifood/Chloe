@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/calendarEventIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_double"
+        android:src="@drawable/ic_clear_grey_24dp" />
+
+    <TextView
+        android:id="@+id/calendarEventTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_double"
+        android:layout_marginEnd="@dimen/default_margin_double"
+        android:layout_marginBottom="@dimen/default_margin_double"
+        android:layout_weight="1"
+        android:text="Event Name" />
+
+    <!-- TODO: add subtitle/description label -->
+
+</LinearLayout>

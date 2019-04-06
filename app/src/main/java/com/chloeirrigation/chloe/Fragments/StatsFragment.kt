@@ -155,6 +155,7 @@ class StatsFragment : Fragment() {
         weatherChart.animateX(1000)
         weatherChart.animateY(1000)
         weatherChart.data = lineData
+        weatherChart.setVisibleXRangeMinimum(1541030400.0f)
 //        weatherChart.xAxis.valueFormatter = DateAxisValueFormatter(referenceWeatherTimestamp)
         weatherChart.axisRight.setDrawLabels(false)
         weatherChart.xAxis.setDrawLabels(false)
@@ -196,8 +197,8 @@ class StatsFragment : Fragment() {
         weatherRainfallChart.animateY(1000)
         weatherRainfallChart.data = lineData
 //        weatherChart.xAxis.valueFormatter = DateAxisValueFormatter(referenceWeatherTimestamp)
-        weatherChart.axisRight.setDrawLabels(false)
-        weatherChart.xAxis.setDrawLabels(false)
+        weatherRainfallChart.axisRight.setDrawLabels(false)
+        weatherRainfallChart.xAxis.setDrawLabels(false)
         weatherRainfallChart.invalidate()
     }
 

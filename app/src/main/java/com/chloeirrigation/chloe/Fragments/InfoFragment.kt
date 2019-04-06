@@ -4,23 +4,23 @@ package com.chloeirrigation.chloe.Fragments
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.chloeirrigation.chloe.Helpers.TAG
-import com.chloeirrigation.chloe.Objects.Field
-import com.github.kittinunf.fuel.httpGet
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_info.*
 import android.widget.SeekBar
+import androidx.fragment.app.Fragment
 import com.chloeirrigation.chloe.ChloeApp
 import com.chloeirrigation.chloe.FieldActivity
+import com.chloeirrigation.chloe.Helpers.TAG
 import com.chloeirrigation.chloe.Helpers.intValue
 import com.chloeirrigation.chloe.Helpers.listValue
 import com.chloeirrigation.chloe.Helpers.stringValue
+import com.chloeirrigation.chloe.Objects.Field
 import com.chloeirrigation.chloe.Objects.FieldData
 import com.chloeirrigation.chloe.R
+import com.github.kittinunf.fuel.httpGet
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_info.*
 import kotlinx.android.synthetic.main.irrigation_status_layout.*
 import me.akatkov.kotlinyjson.JSON
 import java.text.SimpleDateFormat
@@ -49,7 +49,9 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
         Log.d(TAG, "onViewCreated: Loaded field: $field")
 
-        getDataFromApi()
+        if (fieldData.isEmpty()) {
+            getDataFromApi()
+        }
 
         setupWeather()
 
@@ -63,38 +65,38 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             "http://api.agromonitoring.com/agro/1.0/image/search?start=$startTime&end=$endTime&polyid=${field.polyId}&appid=${ChloeApp.agroApiKey}"
 
         url.httpGet().responseString { request, response, result ->
-                val jsonString = result.get()
-                val jsonArray = JSON(jsonString)
+            val jsonString = result.get()
+            val jsonArray = JSON(jsonString)
 
-                if (jsonArray.listValue.isNotEmpty()) {
-                    fieldData.clear()
-                }
-
-                for (day in jsonArray.listValue) {
-                    val jImage = day["image"]
-
-                    val timestamp = day["dt"].intValue * 1000L
-                    val trueColor = jImage["truecolor"].stringValue
-                    val falseColor = jImage["falsecolor"].stringValue
-                    val ndvi = jImage["ndvi"].stringValue
-                    val evi = jImage["evi"].stringValue
-
-                    val data = FieldData(timestamp, trueColor, falseColor, ndvi, evi)
-                    fieldData.add(data)
-                }
-
-                Log.v(TAG, "Field data parsed: ${fieldData.size}")
-
-                preloadImages()
-
-                dateSeekBar.max = fieldData.size
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    dateSeekBar.min = 1
-                }
-
-                segmentedPositionChanged(segmentedControl.selectedAbsolutePosition)
-                updateDateTextView()
+            if (jsonArray.listValue.isNotEmpty()) {
+                fieldData.clear()
             }
+
+            for (day in jsonArray.listValue) {
+                val jImage = day["image"]
+
+                val timestamp = day["dt"].intValue * 1000L
+                val trueColor = jImage["truecolor"].stringValue
+                val falseColor = jImage["falsecolor"].stringValue
+                val ndvi = jImage["ndvi"].stringValue
+                val evi = jImage["evi"].stringValue
+
+                val data = FieldData(timestamp, trueColor, falseColor, ndvi, evi)
+                fieldData.add(data)
+            }
+
+            Log.v(TAG, "Field data parsed: ${fieldData.size}")
+
+            preloadImages()
+
+            dateSeekBar.max = fieldData.size
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                dateSeekBar.min = 1
+            }
+
+            segmentedPositionChanged(segmentedControl.selectedAbsolutePosition)
+            updateDateTextView()
+        }
     }
 
     private fun preloadImages() {
@@ -112,10 +114,10 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
     private fun setupRoot() {
         val drawable = when (field.devPeriod) {
-            1-> R.drawable.ic_root_2
-            2-> R.drawable.ic_root_3
-            3-> R.drawable.ic_root_4
-            4-> R.drawable.ic_root_5
+            1 -> R.drawable.ic_root_2
+            2 -> R.drawable.ic_root_3
+            3 -> R.drawable.ic_root_4
+            4 -> R.drawable.ic_root_5
             else -> R.drawable.ic_root_1 // 0 and others
         }
 
@@ -151,24 +153,40 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     private fun loadTrueColor() {
-        val url = fieldData[dateSeekBar.progress-1].trueColorUrl
-        loadSatelliteImageFrom(url)
+        try {
+            val url = fieldData[dateSeekBar.progress - 1].trueColorUrl
+            loadSatelliteImageFrom(url)
+        } catch (e: IndexOutOfBoundsException) {
+            Log.e(TAG, "loadTrueColor: ", e)
+        }
     }
 
     private fun loadFalseColor() {
-        val url = fieldData[dateSeekBar.progress-1].falseColorUrl
-        loadSatelliteImageFrom(url)
+        try {
+            val url = fieldData[dateSeekBar.progress - 1].falseColorUrl
+            loadSatelliteImageFrom(url)
+        } catch (e: IndexOutOfBoundsException) {
+            Log.e(TAG, "loadTrueColor: ", e)
+        }
     }
 
     private fun loadNDVI() {
-        val url = fieldData[dateSeekBar.progress-1].ndviUrl
-        loadSatelliteImageFrom(url)
+        try {
+            val url = fieldData[dateSeekBar.progress - 1].ndviUrl
+            loadSatelliteImageFrom(url)
+        } catch (e: IndexOutOfBoundsException) {
+            Log.e(TAG, "loadTrueColor: ", e)
+        }
     }
 
 
     private fun loadEVI() {
-        val url = fieldData[dateSeekBar.progress-1].eviUrl
-        loadSatelliteImageFrom(url)
+        try {
+            val url = fieldData[dateSeekBar.progress - 1].eviUrl
+            loadSatelliteImageFrom(url)
+        } catch (e: IndexOutOfBoundsException) {
+            Log.e(TAG, "loadTrueColor: ", e)
+        }
     }
 
     private fun loadSatelliteImageFrom(url: String) {
@@ -178,7 +196,7 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
 
     private fun setupWeather() {
-
+        //TODO: implement the weather
     }
 
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
