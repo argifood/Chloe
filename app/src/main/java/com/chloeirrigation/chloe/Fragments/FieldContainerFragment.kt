@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
-import com.chloeirrigation.chloe.FieldContainerFragmentArgs
 import com.chloeirrigation.chloe.R
 import com.chloeirrigation.chloe.TempToolbarTitleListener
 import kotlinx.android.synthetic.main.fragment_field.*
