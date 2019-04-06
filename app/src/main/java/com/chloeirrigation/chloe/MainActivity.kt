@@ -6,6 +6,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
+//import com.squareup.picasso.Picasso
+//import com.squareup.picasso.OkHttp3Downloader
+
+
 
 class MainActivity : AppCompatActivity(), TempToolbarTitleListener {
 
@@ -19,6 +23,11 @@ class MainActivity : AppCompatActivity(), TempToolbarTitleListener {
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+//        val picasso = Picasso.Builder(this)
+//            .downloader(OkHttp3Downloader(this))
+//            .build()
+//        Picasso.setSingletonInstance(picasso)
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()

@@ -22,4 +22,9 @@
     <string name="last_irrigation">Last Irrigation:</string>
     <string name="next_irrigation">Next Irrigation:</string>
     <string name="last_rainfall">Last Rainfall:</string>
+    <string name="ndvi">NDVI</string>
+    <string name="evi">EVI</string>
+    <string name="false_color">False Color</string>
+    <string name="true_color">True Color</string>
+    <string name="satelite_image">Satelite Image</string>
 </resources>

@@ -7,9 +7,13 @@
 
     <fragment
         android:id="@+id/info_fragment"
-        android:name="com.chloeirrigation.chloe.InfoFragment"
+        android:name="com.chloeirrigation.chloe.Fragments.InfoFragment"
         android:label="Field Information"
-        tools:layout="@layout/fragment_info" />
+        tools:layout="@layout/fragment_info" >
+        <argument
+            android:name="field"
+            app:argType="com.chloeirrigation.chloe.Objects.Field" />
+    </fragment>
 
     <fragment
         android:id="@+id/stats_fragment"

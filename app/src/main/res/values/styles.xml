@@ -10,6 +10,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="buttonStyle">@style/ButtonStyle</item>
     </style>
 
     <style name="CardTitle">
@@ -23,5 +24,11 @@
     <style name="TextViewStyle">
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
     </style>
+
+    <style name="ButtonStyle">
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+
 
 </resources>

@@ -7,9 +7,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.chloeirrigation.chloe.Objects.Field
 import kotlinx.android.synthetic.main.activity_field.*
 
 class FieldActivity : AppCompatActivity(), TempToolbarTitleListener {
+    lateinit var field: Field
 
 //    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 //        when (item.itemId) {
@@ -44,6 +46,8 @@ class FieldActivity : AppCompatActivity(), TempToolbarTitleListener {
 
 //        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         bottomNavigation.setupWithNavController(findNavController(R.id.nav_host_fragment_field))
+
+        field = intent.getParcelableExtra<Field>("field")
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment_field).navigateUp()

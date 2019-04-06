@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="field_type_array_data">
+        <item>True Color</item>
+        <item>False Color</item>
+        <item>NDVI</item>
+        <item>EVI</item>
+    </string-array>
+
+    <string-array name="stats_types_array_data">
+        <!--TODO: add the values here-->
+        <item>True Color</item>
+        <item>False Color</item>
+        <item>NDVI</item>
+        <item>EVI</item>
+    </string-array>
+
+
+</resources>

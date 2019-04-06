@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_stats" />
     <fragment
         android:id="@+id/info_fragment"
-        android:name="com.chloeirrigation.chloe.InfoFragment"
+        android:name="com.chloeirrigation.chloe.Fragments.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
     <fragment

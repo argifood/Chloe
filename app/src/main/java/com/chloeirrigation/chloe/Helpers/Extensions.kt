@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.graphics.Color
 import com.chloeirrigation.chloe.BuildConfig
 import com.chloeirrigation.chloe.R
+import me.akatkov.kotlinyjson.JSON
 
 
 /**
@@ -71,3 +72,41 @@ fun Int.adjustColor(factor: Float): Int {
     val b = Math.round(Color.blue(this) * factor)
     return Color.argb(a, Math.min(r, 255), Math.min(g, 255), Math.min(b, 255))
 }
+
+// KotlinyJSON Extensions
+
+val JSON.booleanValue: Boolean
+    get() {
+        return this.boolean ?: false
+    }
+
+val JSON.intValue: Int
+    get() {
+        return this.int ?: 0
+    }
+
+val JSON.longValue: Long
+    get() {
+        return this.long ?: 0L
+    }
+
+val JSON.doubleValue: Double
+    get() {
+        return this.double ?: 0.0
+    }
+
+val JSON.stringValue: String
+    get() {
+        return this.string ?: ""
+    }
+
+fun JSON.listValue(default: List<JSON>): List<JSON> {
+    return this.list ?: default
+}
+
+/// Returns either the list value or an empty listOf<JSON>() if the value does not exist
+val JSON.listValue: List<JSON>
+    get() {
+        return this.list ?: listOf()
+    }
+

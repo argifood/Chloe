@@ -13,18 +13,9 @@ import android.widget.TextView
 import com.chloeirrigation.chloe.FieldActivity
 import com.chloeirrigation.chloe.R
 import com.chloeirrigation.chloe.Helpers.TAG
+import com.chloeirrigation.chloe.Objects.Field
 import kotlinx.android.synthetic.main.fragment_fields_list.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class FieldsListFragment : Fragment() {
 
     override fun onCreateView(
@@ -48,54 +39,62 @@ class FieldsListFragment : Fragment() {
     private fun setupFieldNames() {
 
         field1.findViewById<TextView>(R.id.fieldNameTextView).text =
-            field1Name
+            fields[0].name
         field2.findViewById<TextView>(R.id.fieldNameTextView).text =
-            field2Name
+            fields[1].name
         field3.findViewById<TextView>(R.id.fieldNameTextView).text =
-            field3Name
+            fields[2].name
         field4.findViewById<TextView>(R.id.fieldNameTextView).text =
-            field4Name
+            fields[3].name
         field5.findViewById<TextView>(R.id.fieldNameTextView).text =
-            field5Name
+            fields[4].name
 
-        field1.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(context?.getDrawable(
-            R.drawable.kopaida_1_field
-        ))
-        field2.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(context?.getDrawable(
-            R.drawable.kopaida_2_field
-        ))
+        field1.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(
+            context?.getDrawable(fields[0].fieldDrawable)
+        )
+
+        field2.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(
+            context?.getDrawable(fields[1].fieldDrawable)
+        )
+
+        field3.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(
+            context?.getDrawable(fields[2].fieldDrawable)
+        )
+
+        field4.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(
+            context?.getDrawable(fields[3].fieldDrawable)
+        )
+
+        field5.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(
+            context?.getDrawable(fields[4].fieldDrawable)
+        )
     }
 
     private fun setupFieldListeners() {
         //TODO: add the actions here
         field1.setOnClickListener {
-//            (activity as TempToolbarTitleListener).expandActionBar(false)
-//
-//            val action = FieldsListFragmentDirections.actionFieldsListFragmentToFieldFragment("Field1")
-//            it.findNavController().navigate(action)
-
             val intent = Intent(context, FieldActivity::class.java)
-            intent.putExtra("fieldName", field1Name)
+            intent.putExtra("field", fields[0])
             startActivity(intent)
         }
 
         field2.setOnClickListener {
-//            (activity as TempToolbarTitleListener).expandActionBar(false)
-//
-//            val action = FieldsListFragmentDirections.actionFieldsListFragmentToFieldFragment("Field1")
-//            it.findNavController().navigate(action)
-
             val intent = Intent(context, FieldActivity::class.java)
-            intent.putExtra("fieldName", field2Name)
+            intent.putExtra("field", fields[1])
             startActivity(intent)
         }
     }
 
     companion object {
-        const val field1Name = "Field 1"
-        const val field2Name = "Field 2"
-        const val field3Name = "Field 3"
-        const val field4Name = "Field 4"
-        const val field5Name = "Field 5"
+
+        // Dummy data
+        val fields = arrayListOf(
+            Field("Field 1", 0, 0, "5ca79c64d86170003e090774", R.drawable.kopaida_1_field),
+            Field("Field 2", 0, 0, "5ca79d53d86170001b09072c", R.drawable.kopaida_2_field),
+            Field("Field 3", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur),
+            Field("Field 4", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur),
+            Field("Field 5", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur)
+        )
+        // TODO: 06/04/2019 Move these to a RecyclerView loaded form the server
     }
 }
