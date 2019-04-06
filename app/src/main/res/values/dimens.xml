@@ -9,6 +9,8 @@
     <dimen name="satellite_field_image_height_large">220dp</dimen>
     <dimen name="sensor_label_width">70dp</dimen>
     <dimen name="sensor_label_height">40dp</dimen>
+    <dimen name="chart_height">400dp</dimen>
+    <dimen name="scrollViewBottomPadding">58dp</dimen>
 
 
 </resources>

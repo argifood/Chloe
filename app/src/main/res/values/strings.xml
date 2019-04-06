@@ -27,4 +27,5 @@
     <string name="false_color">False Color</string>
     <string name="true_color">True Color</string>
     <string name="satelite_image">Satelite Image</string>
+    <string name="sensor_data">Sensor Data</string>
 </resources>
