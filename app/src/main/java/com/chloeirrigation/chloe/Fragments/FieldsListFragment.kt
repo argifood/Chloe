@@ -3,17 +3,15 @@ package com.chloeirrigation.chloe.Fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.chloeirrigation.chloe.FieldActivity
-import com.chloeirrigation.chloe.R
-import com.chloeirrigation.chloe.Helpers.TAG
 import com.chloeirrigation.chloe.Objects.Field
+import com.chloeirrigation.chloe.R
 import kotlinx.android.synthetic.main.fragment_fields_list.*
 
 class FieldsListFragment : Fragment() {
@@ -28,8 +26,6 @@ class FieldsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Log.d(TAG, "onViewCreated: Done!")
 
         setupFieldNames()
         setupFieldListeners()
@@ -89,11 +85,11 @@ class FieldsListFragment : Fragment() {
 
         // Dummy data
         val fields = arrayListOf(
-            Field("Field 1", 0, 0, "5ca79c64d86170003e090774", R.drawable.kopaida_1_field, 3, 30, 27, 2.0),
-            Field("Field 2", 0, 0, "5ca79d53d86170001b09072c", R.drawable.kopaida_2_field, 1,29, 35, 1.3),
-            Field("Field 3", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur, 0, 22, 30, 1.2),
-            Field("Field 4", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur, 0, 22, 30, 1.2),
-            Field("Field 5", 0, 0, "5ca79d53d86170001b09072c", R.drawable.field_blur, 0, 22, 30, 1.2)
+            Field("5bc4ff031023c1b16a71554c","Kopaida Wheat Field", 38.498389, 23.230694, "5ca79c64d86170003e090774", R.drawable.kopaida_1_field, 3, 30, 27, 2.0),
+            Field("5c48808317c477201a386dad","Kopaida Lettuce Field", 38.508818, 23.223839, "5ca79d53d86170001b09072c", R.drawable.kopaida_2_field, 1,29, 35, 1.3),
+            Field("","Anthili Field 1", 0.0, 0.0, "5ca79d53d86170001b09072c", R.drawable.anthili_1_field, 0, 22, 30, 1.2),
+            Field("","Anthili Field 2", 0.0, 0.0, "5ca79d53d86170001b09072c", R.drawable.anthili_2_field, 0, 22, 30, 1.2),
+            Field("","Anthili Field 3", 0.0, 0.0, "5ca79d53d86170001b09072c", R.drawable.kopaida_1_field, 0, 22, 30, 1.2)
         )
         // TODO: 06/04/2019 Move these to a RecyclerView loaded form the server
     }

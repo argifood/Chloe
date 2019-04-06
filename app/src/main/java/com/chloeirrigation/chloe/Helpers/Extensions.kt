@@ -114,8 +114,8 @@ val JSON.listValue: List<JSON>
     }
 
 @SuppressLint("RestrictedApi")
-fun EventDay.getIconImageDrawable(): Drawable {
-        return this.imageDrawable as Drawable
+fun EventDay.getIconImageDrawable(): Int {
+        return this.imageDrawable as Int
     }
 
 @SuppressLint("RestrictedApi")

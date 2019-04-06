@@ -10,9 +10,10 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 class Field(
+    var id: String,
     var name: String = "",
-    var lat: Int,
-    var lon: Int,
+    var lat: Double,
+    var lon: Double,
     var polyId: String,
     var fieldDrawable: Int,
     var devPeriod: Int,

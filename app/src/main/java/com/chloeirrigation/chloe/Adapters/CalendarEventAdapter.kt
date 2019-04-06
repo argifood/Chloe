@@ -43,12 +43,15 @@ class CalendarEventAdapter(
 
         val eventDrawable = event.getIconImageDrawable()
         val title = when (eventDrawable) {
-            context?.getDrawable(R.drawable.ic_clear_grey_24dp) -> "Clear!"
-            // TODO: 06/04/2019 Add appropriate icons and events here
+            R.drawable.irrigation -> "Crop Irrigation."
+            R.drawable.waterdrop -> "Rainfall."
+            R.drawable.spray -> "Crop sprayed with pesticide."
+            R.drawable.seed -> "Crop planted."
+            R.drawable.soil -> "Crop root growing detected."
             else -> "Crop Event"
         }
 
-        holder.icon.setImageDrawable(eventDrawable)
+        holder.icon.setImageDrawable(context?.getDrawable(eventDrawable))
         holder.eventTitle.text = title
     }
 }

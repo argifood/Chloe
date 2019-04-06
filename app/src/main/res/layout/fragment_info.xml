@@ -145,7 +145,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/ic_clear_grey_24dp"
+                        android:src="@drawable/field"
                         card_view:layout_constraintLeft_toLeftOf="parent"
                         card_view:layout_constraintStart_toStartOf="parent"
                         card_view:layout_constraintTop_toTopOf="parent" />
@@ -155,7 +155,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Kopaida Wheat Field"
+                        android:text="@string/example_field_name"
                         android:textStyle="bold"
                         card_view:layout_constraintBottom_toBottomOf="@+id/fieldIcon"
                         card_view:layout_constraintStart_toEndOf="@+id/fieldIcon"
@@ -178,7 +178,7 @@
                         android:id="@+id/cropTypeLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin_double"
                         android:orientation="horizontal"
                         card_view:layout_constraintStart_toStartOf="parent"
                         card_view:layout_constraintTop_toBottomOf="@+id/fieldIcon">
@@ -188,7 +188,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:src="@drawable/ic_clear_grey_24dp"
+                            android:src="@drawable/crop"
                             card_view:layout_constraintLeft_toLeftOf="parent"
                             card_view:layout_constraintStart_toStartOf="parent"
                             card_view:layout_constraintTop_toTopOf="parent" />
@@ -214,7 +214,7 @@
                         android:id="@+id/cropPlantedLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin_double"
                         android:orientation="horizontal"
                         card_view:layout_constraintStart_toStartOf="parent"
                         card_view:layout_constraintTop_toBottomOf="@+id/cropTypeLayout">
@@ -223,8 +223,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:src="@drawable/ic_clear_grey_24dp"
-                            android:visibility="invisible"
+                            android:src="@drawable/calendar_colored"
                             card_view:layout_constraintLeft_toLeftOf="parent"
                             card_view:layout_constraintStart_toStartOf="parent"
                             card_view:layout_constraintTop_toTopOf="parent" />
@@ -241,7 +240,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/default_margin"
-                            android:text="02/04/2019" />
+                            android:text="02/03/2019" />
 
                     </LinearLayout>
 
@@ -254,6 +253,17 @@
                         android:background="@color/cardHeaderSeparatorGrey"
                         card_view:layout_constraintTop_toBottomOf="@id/cropPlantedLayout" />
 
+                    <TextView
+                        android:id="@+id/satelliteTitlesTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin_double"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/field_image"
+                        card_view:layout_constraintEnd_toEndOf="parent"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@id/satelliteSeparator" />
 
                     <!-- Segmented control button -->
                     <segmented_control.widget.custom.android.com.segmentedcontrol.SegmentedControl
@@ -268,39 +278,17 @@
                         app:textVerticalPadding="6dp"
                         card_view:layout_constraintEnd_toEndOf="parent"
                         card_view:layout_constraintStart_toStartOf="parent"
-                        card_view:layout_constraintTop_toBottomOf="@id/satelliteSeparator" />
-
-                    <LinearLayout
-                        android:id="@+id/satelliteTitlesLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/default_margin_double"
-                        android:orientation="horizontal"
-                        card_view:layout_constraintTop_toBottomOf="@id/segmentedControl">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="@string/field_image" />
-
-                        <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:gravity="center"-->
-                        <!--android:text="@string/ndvi_image" />-->
-
-                    </LinearLayout>
+                        card_view:layout_constraintTop_toBottomOf="@id/satelliteTitlesTextView" />
 
                     <RelativeLayout
                         android:id="@+id/satelliteImageLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        card_view:layout_constraintTop_toBottomOf="@id/satelliteTitlesLayout">
+                        android:layout_marginTop="@dimen/default_margin"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintEnd_toEndOf="parent"
+                        card_view:layout_constraintTop_toBottomOf="@id/segmentedControl">
 
                         <!--<ImageView-->
                         <!--android:id="@+id/fieldImage"-->
@@ -330,7 +318,6 @@
                         android:id="@+id/satelliteDateLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin_double"
                         android:orientation="vertical"
                         card_view:layout_constraintEnd_toEndOf="parent"
                         card_view:layout_constraintStart_toStartOf="parent"
@@ -339,7 +326,14 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin_double"
                             android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_marginLeft="@dimen/default_margin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/satellite"/>
 
 
                             <TextView
@@ -347,6 +341,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="8dp"
+                                android:layout_marginStart="8dp"
                                 android:gravity="center"
                                 android:text="Satellite Image Date:" />
 

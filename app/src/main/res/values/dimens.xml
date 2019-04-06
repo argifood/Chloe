@@ -11,6 +11,7 @@
     <dimen name="sensor_label_height">40dp</dimen>
     <dimen name="chart_height">400dp</dimen>
     <dimen name="scrollViewBottomPadding">58dp</dimen>
+    <dimen name="calendar_event_width">30dp</dimen>
 
 
 </resources>
