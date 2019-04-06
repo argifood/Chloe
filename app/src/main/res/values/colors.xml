@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorAccent">#D81B60</color>-->
+
+    <color name="colorPrimary">#76bcf5</color>
+    <color name="colorPrimaryDark">#5889b2</color>
+    <color name="colorAccent">#60AF66</color>
+
+    <!--TODO: change these-->
+    <color name="blueLight">#76bcf5</color>
+    <color name="blue">#5889b2</color>
+    <color name="green">#60AF66</color>
+    <color name="yellow">#fec842</color>
+    <color name="red">#C55E63</color>
+
+    <color name="grey">#C0C0C0</color>
+    <color name="greyLight">#D7D7D7</color>
+    <color name="greyDark">#6D6D6D</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="cardHeaderGray">#FAFAFA</color>
+    <color name="cardHeaderSeparatorGrey">#D7D7D7</color>
+    <color name="cardInnerGray">#FCFCFC</color>
+
+    <color name="whiteOpaque">#88FFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+
+</resources>
