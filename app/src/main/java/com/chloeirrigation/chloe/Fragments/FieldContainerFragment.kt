@@ -1,4 +1,4 @@
-package com.chloeirrigation.chloe
+package com.chloeirrigation.chloe.Fragments
 
 
 import android.os.Bundle
@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.chloeirrigation.chloe.FieldContainerFragmentArgs
+import com.chloeirrigation.chloe.R
+import com.chloeirrigation.chloe.TempToolbarTitleListener
 import kotlinx.android.synthetic.main.fragment_field.*
 
 

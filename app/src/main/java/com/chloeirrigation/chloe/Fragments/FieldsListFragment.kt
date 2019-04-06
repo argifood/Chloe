@@ -1,4 +1,4 @@
-package com.chloeirrigation.chloe
+package com.chloeirrigation.chloe.Fragments
 
 
 import android.content.Intent
@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
+import com.chloeirrigation.chloe.FieldActivity
+import com.chloeirrigation.chloe.R
+import com.chloeirrigation.chloe.Helpers.TAG
 import kotlinx.android.synthetic.main.fragment_fields_list.*
 
 
@@ -45,14 +47,23 @@ class FieldsListFragment : Fragment() {
 
     private fun setupFieldNames() {
 
-        field1.findViewById<TextView>(R.id.fieldNameTextView).text = field1Name
-        field2.findViewById<TextView>(R.id.fieldNameTextView).text = field2Name
-        field3.findViewById<TextView>(R.id.fieldNameTextView).text = field3Name
-        field4.findViewById<TextView>(R.id.fieldNameTextView).text = field4Name
-        field5.findViewById<TextView>(R.id.fieldNameTextView).text = field5Name
+        field1.findViewById<TextView>(R.id.fieldNameTextView).text =
+            field1Name
+        field2.findViewById<TextView>(R.id.fieldNameTextView).text =
+            field2Name
+        field3.findViewById<TextView>(R.id.fieldNameTextView).text =
+            field3Name
+        field4.findViewById<TextView>(R.id.fieldNameTextView).text =
+            field4Name
+        field5.findViewById<TextView>(R.id.fieldNameTextView).text =
+            field5Name
 
-        field1.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(context?.getDrawable(R.drawable.kopaida_1_field))
-        field2.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(context?.getDrawable(R.drawable.kopaida_2_field))
+        field1.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(context?.getDrawable(
+            R.drawable.kopaida_1_field
+        ))
+        field2.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(context?.getDrawable(
+            R.drawable.kopaida_2_field
+        ))
     }
 
     private fun setupFieldListeners() {

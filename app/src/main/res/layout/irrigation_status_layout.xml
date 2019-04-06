@@ -1,11 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/irrigationStatusLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <!-- Root Depth -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/rootImageView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_root_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sensor1TextView"
+                android:layout_width="@dimen/sensor_label_width"
+                android:layout_height="@dimen/sensor_label_height"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@drawable/label_blue"
+                android:padding="@dimen/default_margin"
+                android:text="24%"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sensor_1_guideline" />
+
+            <TextView
+                android:id="@+id/sensor2TextView"
+                android:layout_width="@dimen/sensor_label_width"
+                android:layout_height="@dimen/sensor_label_height"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@drawable/label_blue_dark"
+                android:padding="@dimen/default_margin"
+                android:text="37%"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/sensor_2_guideline"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/sensorNutrientsTextView"
+                android:layout_width="110dp"
+                android:layout_height="@dimen/sensor_label_height"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@drawable/label_green"
+                android:padding="@dimen/default_margin"
+                android:text="1 dS/cm"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/sensor_nutrients_guideline"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:background="@drawable/line_dash"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:gravity="end"
+                android:text="40cm"
+                app:layout_constraintBottom_toBottomOf="@id/sensor_nutrients_guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sensorNutrientsTextView" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:background="@drawable/line_dash"
+                android:gravity="end"
+                android:text="60cm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sensor2TextView"
+                app:layout_constraintBottom_toTopOf="@id/sensor_2_guideline" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:background="@drawable/line_dash"
+                android:gravity="end"
+                android:text="60cm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sensor1TextView"
+                app:layout_constraintTop_toBottomOf="@id/sensor_1_guideline" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/sensor_1_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/sensor_2_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="180dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/sensor_nutrients_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="120dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <!-- Irrigation Status -->
@@ -36,7 +153,7 @@
                 android:id="@+id/irrigNextTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin_double"
                 android:text="@string/next_irrigation_example" />
 
         </LinearLayout>
@@ -69,7 +186,7 @@
                 android:id="@+id/irrigLastTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin_double"
                 android:text="@string/example_last_irrigation" />
 
         </LinearLayout>
@@ -102,7 +219,7 @@
                 android:id="@+id/irrigRainfallTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
+                android:layout_marginStart="29dp"
                 android:text="@string/example_last_rain" />
 
         </LinearLayout>

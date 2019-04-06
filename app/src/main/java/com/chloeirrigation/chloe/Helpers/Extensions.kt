@@ -1,4 +1,4 @@
-package com.chloeirrigation.chloe
+package com.chloeirrigation.chloe.Helpers
 
 import android.content.Context
 import android.graphics.PorterDuff
@@ -9,10 +9,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import org.intellij.lang.annotations.Flow
-import android.R.attr.factor
-import android.R.color
 import android.graphics.Color
+import com.chloeirrigation.chloe.BuildConfig
+import com.chloeirrigation.chloe.R
 
 
 /**

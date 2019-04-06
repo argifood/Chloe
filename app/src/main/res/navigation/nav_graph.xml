@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fieldsListFragment"
-        android:name="com.chloeirrigation.chloe.FieldsListFragment"
+        android:name="com.chloeirrigation.chloe.Fragments.FieldsListFragment"
         android:label="George"
         tools:layout="@layout/fragment_fields_list">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/fieldFragment"
-        android:name="com.chloeirrigation.chloe.FieldContainerFragment"
+        android:name="com.chloeirrigation.chloe.Fragments.FieldContainerFragment"
         android:label="fragment_field"
         tools:layout="@layout/fragment_field" >
         <argument
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/stats_fragment"
-        android:name="com.chloeirrigation.chloe.StatsFragment"
+        android:name="com.chloeirrigation.chloe.Fragments.StatsFragment"
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" />
     <fragment
@@ -48,7 +48,7 @@
         tools:layout="@layout/fragment_info" />
     <fragment
         android:id="@+id/calendar_fragment"
-        android:name="com.chloeirrigation.chloe.CalendarFragment"
+        android:name="com.chloeirrigation.chloe.Fragments.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
 </navigation>

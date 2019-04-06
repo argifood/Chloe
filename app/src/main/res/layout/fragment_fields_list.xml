@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".FieldsListFragment">
+    tools:context=".Fragments.FieldsListFragment">
 
     <LinearLayout
         android:layout_marginTop="@dimen/default_margin"

@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/stats_fragment"
-        android:name="com.chloeirrigation.chloe.StatsFragment"
+        android:name="com.chloeirrigation.chloe.Fragments.StatsFragment"
         android:label="Stats"
         tools:layout="@layout/fragment_stats" />
 
     <fragment
         android:id="@+id/calendar_fragment"
-        android:name="com.chloeirrigation.chloe.CalendarFragment"
+        android:name="com.chloeirrigation.chloe.Fragments.CalendarFragment"
         android:label="Calendar"
         tools:layout="@layout/fragment_calendar" />
 
