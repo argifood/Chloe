@@ -16,6 +16,7 @@ import com.chloeirrigation.chloe.BuildConfig
 import com.chloeirrigation.chloe.R
 import me.akatkov.kotlinyjson.JSON
 import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 
 
 /**
@@ -112,6 +113,11 @@ val JSON.listValue: List<JSON>
     get() {
         return this.list ?: listOf()
     }
+
+fun randomInt(min: Int, max: Int): Int {
+    return ThreadLocalRandom.current().nextInt(min, max+1)
+}
+
 
 @SuppressLint("RestrictedApi")
 fun EventDay.getIconImageDrawable(): Int {

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.applandeo.materialcalendarview.EventDay
 import com.chloeirrigation.chloe.Adapters.CalendarEventAdapter
 import com.chloeirrigation.chloe.Helpers.TAG
+import com.chloeirrigation.chloe.Helpers.randomInt
 import com.chloeirrigation.chloe.R
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.util.*
@@ -57,11 +58,21 @@ class CalendarFragment : Fragment() {
         val calendar = Calendar.getInstance()
         calendar.set(2019, 3, 4)
 
-        val irrigationEvent = EventDay(calendar, R.drawable.irrigation)
-        val rainEvent = EventDay(calendar, R.drawable.waterdrop)
-        val cropPlantedEvent = EventDay(calendar, R.drawable.seed)
-        val cropGrowthEvent = EventDay(calendar, R.drawable.soil)
-        val sprayEvent = EventDay(calendar, R.drawable.spray)
+        val irrigationEvent = R.drawable.irrigation
+        val rainEvent = R.drawable.waterdrop
+        val cropPlantedEvent = R.drawable.seed
+        val cropGrowthEvent = R.drawable.soil
+        val sprayEvent = R.drawable.spray
+
+        val eventArray = arrayListOf(irrigationEvent, cropPlantedEvent, cropGrowthEvent, sprayEvent, rainEvent)
+
+        for (i in 0 until 20) {
+            val cal = Calendar.getInstance()
+            cal.set(2019, randomInt(2, 4), randomInt(1, 30))
+
+            val event = EventDay(cal, eventArray[randomInt(0, eventArray.size - 1)])
+            events.add(event)
+        }
 
         // Irrigation Events
 //        calendar.add(Calendar.DAY_OF_MONTH, 2)
@@ -75,12 +86,6 @@ class CalendarFragment : Fragment() {
 //
 //        calendar.add(Calendar.DAY_OF_MONTH, -7)
 //        events.add(irrigationEvent.setCalendar(calendar))
-
-
-        events.add(irrigationEvent)
-        events.add(sprayEvent)
-        events.add(rainEvent)
-        events.add(cropGrowthEvent)
 
         calendarView.setEvents(events)
         Log.d(TAG, "setupEvents: Added ${events.size} events!")

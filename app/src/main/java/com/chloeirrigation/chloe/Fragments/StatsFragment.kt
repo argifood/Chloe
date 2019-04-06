@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.chloeirrigation.chloe.Helpers.*
 import com.chloeirrigation.chloe.R
+import com.chloeirrigation.chloe.ViewModels.StatsViewModel
+import com.github.kittinunf.fuel.httpGet
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.*
 import kotlinx.android.synthetic.main.fragment_stats.*
@@ -17,17 +20,12 @@ import me.akatkov.kotlinyjson.JSON
 
 class StatsFragment : Fragment() {
 
-    private val moistureHightData = arrayListOf<Entry>()
-    private val moistureLowData = arrayListOf<Entry>()
-    private val soilTemperatureHighData = arrayListOf<Entry>()
-    private val soilTemperatureLowData = arrayListOf<Entry>()
+    private val viewModel: StatsViewModel by lazy {
+        ViewModelProviders.of(this).get(StatsViewModel::class.java)
+    }
 
-    private val temperatureData = arrayListOf<Entry>()
-    private val humidityData = arrayListOf<Entry>()
-    private val rainData = arrayListOf<BarEntry>()
-
-    private var referenceSensorTimestamp = 0L
-    private var referenceWeatherTimestamp = 0L
+    val sensorDataUrl = "http://api.chloeirrigation.com/chloe/field/sensor/5bc4ff031023c1b16a71554c"
+    val weatherDataUrl = "http://api.chloeirrigation.com/chloe/field/weather/5bc4ff031023c1b16a71554c"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,60 +45,98 @@ class StatsFragment : Fragment() {
     }
 
     private fun loadData() {
-        var sensorJsonString = resources.openRawResource(R.raw.sensor_data).bufferedReader().use { it.readText() }
-        var jsonData = JSON(sensorJsonString).listValue
+        if (!Companion.useLocalResources) {
+            if (viewModel.sensorDataIsEmpty())
+                sensorDataUrl.httpGet().responseString { req, res, result ->
+                    val jsonString = result.get()
+                    val json = JSON(jsonString)
+                    parseSensorDataFrom(json)
+                    Log.d(TAG, "loadData: Sensor Data fetched! Count: ${viewModel.moistureHighData.size}")
 
-        if (jsonData.isNotEmpty()) {
-            moistureHightData.clear()
-            moistureLowData.clear()
+                    setupSensorCharts()
+                }
 
-            soilTemperatureHighData.clear()
-            soilTemperatureLowData.clear()
+            if (viewModel.weatherDataIsEmpty()) {
+                weatherDataUrl.httpGet().responseString { req, res, result ->
+                    val jsonString = result.get()
+                    val json = JSON(jsonString)
+                    parseWeatherDataFrom(json)
+                    Log.d(TAG, "loadData: Weather Data fetched! Count: ${viewModel.temperatureData.size}")
+
+                    setupWeatherCharts()
+                }
+            }
+
+        } else {
+            val sensorJsonString = resources.openRawResource(R.raw.sensor_data).bufferedReader().use { it.readText() }
+            var json = JSON(sensorJsonString)
+
+            parseSensorDataFrom(json)
+
+            // Load the weather data
+            val weatherJsonString = resources.openRawResource(R.raw.weather_data).bufferedReader().use { it.readText() }
+            json = JSON(weatherJsonString)
+            parseWeatherDataFrom(json)
+            Log.d(TAG, "loadData: Data loaded successfully!")
         }
-        referenceSensorTimestamp = jsonData[0]["timestamp"].longValue
+
+    }
+
+    private fun parseSensorDataFrom(json: JSON) {
+        val jsonData = json.listValue
+        if (jsonData.isNotEmpty()) {
+            viewModel.moistureHighData.clear()
+            viewModel.moistureLowData.clear()
+
+            viewModel.soilTemperatureHighData.clear()
+            viewModel.soilTemperatureLowData.clear()
+        }
+        viewModel.referenceSensorTimestamp = jsonData[0]["timestamp"].longValue
 
         for (jObj in jsonData) {
-            val timestamp = (jObj["timestamp"].longValue).toFloat() - referenceSensorTimestamp
+            val timestamp = (jObj["timestamp"].longValue).toFloat() - viewModel.referenceSensorTimestamp
             val moistureH = jObj["swvl1"].doubleValue.toFloat()
             val moistureL = jObj["swvl2"].doubleValue.toFloat()
             val temperatureH = (jObj["stl1"].doubleValue - 273).toFloat()
             val temperatureL = (jObj["stl2"].doubleValue - 273).toFloat()
 
-            moistureHightData.add(Entry(timestamp, moistureH))
-            moistureLowData.add(Entry(timestamp, moistureL))
-            soilTemperatureHighData.add(Entry(timestamp, temperatureH))
-            soilTemperatureLowData.add(Entry(timestamp, temperatureL))
+            viewModel.moistureHighData.add(Entry(timestamp, moistureH))
+            viewModel.moistureLowData.add(Entry(timestamp, moistureL))
+            viewModel.soilTemperatureHighData.add(Entry(timestamp, temperatureH))
+            viewModel.soilTemperatureLowData.add(Entry(timestamp, temperatureL))
+        }
+    }
+
+    private fun parseWeatherDataFrom(json: JSON) {
+        val jsonData = json.listValue
+        if (jsonData.isNotEmpty()) {
+            viewModel.temperatureData.clear()
+            viewModel.humidityData.clear()
+            viewModel.rainData.clear()
         }
 
-        sensorJsonString = ""
-
-        // Load the weather data
-        val weatherJsonString = resources.openRawResource(R.raw.weather_data).bufferedReader().use { it.readText() }
-        jsonData = JSON(weatherJsonString).listValue
-        referenceWeatherTimestamp = jsonData[0]["timestamp"].longValue
+        viewModel.referenceWeatherTimestamp = jsonData[0]["timestamp"].longValue
 
         for (jObj in jsonData) {
-            val timestamp = (jObj["timestamp"].longValue).toFloat() - referenceWeatherTimestamp
+            val timestamp = (jObj["timestamp"].longValue).toFloat() - viewModel.referenceWeatherTimestamp
             val temperature = (jObj["2t"].doubleValue).toFloat()
             val rain = jObj["tp"].doubleValue.toFloat()
             val humidity = jObj["hum"].doubleValue.toFloat()
 
-            temperatureData.add(Entry(timestamp, temperature))
-            humidityData.add(Entry(timestamp, humidity))
-            rainData.add(BarEntry(timestamp, rain))
+            viewModel.temperatureData.add(Entry(timestamp, temperature))
+            viewModel.humidityData.add(Entry(timestamp, humidity))
+            viewModel.rainData.add(BarEntry(timestamp, rain))
         }
-
-        Log.d(TAG, "loadData: Data loaded successfully!")
     }
 
     private fun setMoistureData() {
-        val dataSetMH = LineDataSet(moistureHightData, "Soil Moisture 30cm")
+        val dataSetMH = LineDataSet(viewModel.moistureHighData, "Soil Moisture 30cm")
         dataSetMH.color = context!!.getColor(R.color.blue)
         dataSetMH.lineWidth = 4.0f
         dataSetMH.setDrawCircles(false)
         dataSetMH.setDrawCircleHole(false)
 
-        val dataSetML = LineDataSet(moistureLowData, "Soil Moisture 90cm")
+        val dataSetML = LineDataSet(viewModel.moistureLowData, "Soil Moisture 90cm")
         dataSetML.color = context!!.getColor(R.color.green)
         dataSetML.lineWidth = 4.0f
         dataSetML.setDrawCircles(false)
@@ -113,18 +149,18 @@ class StatsFragment : Fragment() {
         sensorChart.animateX(1000)
         sensorChart.animateY(1000)
         sensorChart.data = lineData
-        sensorChart.xAxis.valueFormatter = DateAxisValueFormatter(referenceSensorTimestamp)
+        sensorChart.xAxis.valueFormatter = DateAxisValueFormatter(viewModel.referenceSensorTimestamp)
         sensorChart.invalidate()
     }
 
     private fun setSoilTemperatureData() {
-        val dataSetTH = LineDataSet(soilTemperatureHighData, "Soil Temperature 30cm")
+        val dataSetTH = LineDataSet(viewModel.soilTemperatureHighData, "Soil Temperature 30cm")
         dataSetTH.color = context!!.getColor(R.color.blue).adjustColor(1.2f)
         dataSetTH.lineWidth = 4.0f
         dataSetTH.setDrawCircles(false)
         dataSetTH.setDrawCircleHole(false)
 
-        val dataSetTL = LineDataSet(soilTemperatureLowData, "Soil Temperature 90cm")
+        val dataSetTL = LineDataSet(viewModel.soilTemperatureLowData, "Soil Temperature 90cm")
         dataSetTL.color = context!!.getColor(R.color.green).adjustColor(1.2f)
         dataSetTL.lineWidth = 4.0f
         dataSetTL.setDrawCircles(false)
@@ -137,12 +173,12 @@ class StatsFragment : Fragment() {
         sensorChart.animateX(1000)
         sensorChart.animateY(1000)
         sensorChart.data = lineData
-        sensorChart.xAxis.valueFormatter = DateAxisValueFormatter(referenceSensorTimestamp)
+        sensorChart.xAxis.valueFormatter = DateAxisValueFormatter(viewModel.referenceSensorTimestamp)
         sensorChart.invalidate()
     }
 
     private fun setTemperatureData() {
-        val datasetTemperature = LineDataSet(temperatureData, "Temperature")
+        val datasetTemperature = LineDataSet(viewModel.temperatureData, "Temperature")
         datasetTemperature.color = context!!.getColor(R.color.blue).adjustColor(0.8f)
         datasetTemperature.lineWidth = 4.0f
         datasetTemperature.setDrawCircles(false)
@@ -163,7 +199,7 @@ class StatsFragment : Fragment() {
     }
 
     private fun setHumidityData() {
-        val datasetHumidity = LineDataSet(humidityData, "Humidity")
+        val datasetHumidity = LineDataSet(viewModel.humidityData, "Humidity")
         datasetHumidity.color = context!!.getColor(R.color.yellow).adjustColor(0.7f)
         datasetHumidity.lineWidth = 4.0f
         datasetHumidity.setDrawCircles(false)
@@ -183,7 +219,7 @@ class StatsFragment : Fragment() {
     }
 
     private fun setRainData() {
-        val datasetRain = BarDataSet(rainData, "Precipitation") //LineDataSet(humidityData, "Humidity")
+        val datasetRain = BarDataSet(viewModel.rainData, "Precipitation") //LineDataSet(humidityData, "Humidity")
         datasetRain.color = context!!.getColor(R.color.yellow).adjustColor(0.7f)
 //        dataSetTemperature.lineWidth = 4.0f
 //        dataSetTemperature.setDrawCircles(false)
@@ -250,6 +286,10 @@ class StatsFragment : Fragment() {
                 setTemperatureData() // Temperature
             }
         }
+    }
+
+    companion object {
+        const val useLocalResources = false
     }
 
 }
