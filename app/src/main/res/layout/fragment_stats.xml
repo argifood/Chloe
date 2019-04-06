@@ -68,7 +68,9 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/sensorChart"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/chart_height" />
+                        android:layout_height="@dimen/chart_height"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_marginRight="@dimen/default_margin" />
 
                 </LinearLayout>
 
@@ -99,7 +101,7 @@
                     style="@style/CardTitle"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="@string/sensor_data" />
+                    android:text="@string/weather_data" />
 
                 <!-- Separator View -->
                 <View
@@ -130,7 +132,9 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/weatherChart"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/chart_height" />
+                        android:layout_height="@dimen/chart_height"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_marginRight="@dimen/default_margin" />
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/weatherRainfallChart"

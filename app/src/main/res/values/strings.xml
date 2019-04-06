@@ -28,4 +28,5 @@
     <string name="true_color">True Color</string>
     <string name="satelite_image">Satelite Image</string>
     <string name="sensor_data">Sensor Data</string>
+    <string name="weather_data">Weather Data</string>
 </resources>
