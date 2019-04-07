@@ -64,38 +64,46 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         val url =
             "http://api.agromonitoring.com/agro/1.0/image/search?start=$startTime&end=$endTime&polyid=${field.polyId}&appid=${ChloeApp.agroApiKey}"
 
-        url.httpGet().responseString { request, response, result ->
-            val jsonString = result.get()
-            val jsonArray = JSON(jsonString)
+        try {
+            url.httpGet().responseString { request, response, result ->
+                val jsonString = result.get()
+                val jsonArray = JSON(jsonString)
 
-            if (jsonArray.listValue.isNotEmpty()) {
-                fieldData.clear()
+                if (jsonArray.listValue.isNotEmpty()) {
+                    fieldData.clear()
+                }
+
+                for (day in jsonArray.listValue) {
+                    val jImage = day["image"]
+
+                    val timestamp = day["dt"].intValue * 1000L
+                    val trueColor = jImage["truecolor"].stringValue
+                    val falseColor = jImage["falsecolor"].stringValue
+                    val ndvi = jImage["ndvi"].stringValue
+                    val evi = jImage["evi"].stringValue
+
+                    val data = FieldData(timestamp, trueColor, falseColor, ndvi, evi)
+                    fieldData.add(data)
+                }
+
+                Log.v(TAG, "Field data parsed: ${fieldData.size}")
+
+                preloadImages()
+
+                try {
+                    dateSeekBar.max = fieldData.size
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        dateSeekBar.min = 1
+                    }
+                } catch (e: IllegalStateException) {
+                    Log.e(TAG, "getDataFromApi: Could not load seekBar", e)
+                }
+
+                segmentedPositionChanged(segmentedControl.selectedAbsolutePosition)
+                updateDateTextView()
             }
-
-            for (day in jsonArray.listValue) {
-                val jImage = day["image"]
-
-                val timestamp = day["dt"].intValue * 1000L
-                val trueColor = jImage["truecolor"].stringValue
-                val falseColor = jImage["falsecolor"].stringValue
-                val ndvi = jImage["ndvi"].stringValue
-                val evi = jImage["evi"].stringValue
-
-                val data = FieldData(timestamp, trueColor, falseColor, ndvi, evi)
-                fieldData.add(data)
-            }
-
-            Log.v(TAG, "Field data parsed: ${fieldData.size}")
-
-            preloadImages()
-
-            dateSeekBar.max = fieldData.size
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                dateSeekBar.min = 1
-            }
-
-            segmentedPositionChanged(segmentedControl.selectedAbsolutePosition)
-            updateDateTextView()
+        } catch (e: Exception) {
+            Log.e(TAG, "getDataFromApi: Server request failed", e)
         }
     }
 

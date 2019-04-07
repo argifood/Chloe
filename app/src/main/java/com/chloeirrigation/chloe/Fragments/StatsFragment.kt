@@ -47,23 +47,31 @@ class StatsFragment : Fragment() {
     private fun loadData() {
         if (!Companion.useLocalResources) {
             if (viewModel.sensorDataIsEmpty())
-                sensorDataUrl.httpGet().responseString { req, res, result ->
-                    val jsonString = result.get()
-                    val json = JSON(jsonString)
-                    parseSensorDataFrom(json)
-                    Log.d(TAG, "loadData: Sensor Data fetched! Count: ${viewModel.moistureHighData.size}")
+                try {
+                    sensorDataUrl.httpGet().responseString { req, res, result ->
+                        val jsonString = result.get()
+                        val json = JSON(jsonString)
+                        parseSensorDataFrom(json)
+                        Log.d(TAG, "loadData: Sensor Data fetched! Count: ${viewModel.moistureHighData.size}")
 
-                    setupSensorCharts()
+                        setupSensorCharts()
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "loadData: Sensor Request failed", e)
                 }
 
             if (viewModel.weatherDataIsEmpty()) {
-                weatherDataUrl.httpGet().responseString { req, res, result ->
-                    val jsonString = result.get()
-                    val json = JSON(jsonString)
-                    parseWeatherDataFrom(json)
-                    Log.d(TAG, "loadData: Weather Data fetched! Count: ${viewModel.temperatureData.size}")
+                try {
+                    weatherDataUrl.httpGet().responseString { req, res, result ->
+                        val jsonString = result.get()
+                        val json = JSON(jsonString)
+                        parseWeatherDataFrom(json)
+                        Log.d(TAG, "loadData: Weather Data fetched! Count: ${viewModel.temperatureData.size}")
 
-                    setupWeatherCharts()
+                        setupWeatherCharts()
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "loadData: Weather Request failed", e)
                 }
             }
 
