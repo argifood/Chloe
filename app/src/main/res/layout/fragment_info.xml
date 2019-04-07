@@ -44,12 +44,14 @@
                     android:background="@color/cardHeaderSeparatorGrey" />
 
                 <!-- TODO: Replace the image with an actual weather layout -->
-                <ImageView
-                    android:id="@+id/weather_card_imageview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:src="@drawable/weather_placeholder" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/weather_card_imageview"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:src="@drawable/weather_placeholder" />-->
+
+                <include layout="@layout/weather_layout"/>
 
             </LinearLayout>
 
@@ -310,7 +312,7 @@
                             android:layout_height="@dimen/satellite_field_image_height"
                             android:layout_marginTop="8dp"
                             android:layout_weight="1"
-                            android:contentDescription="@string/satelite_image" />
+                            android:contentDescription="@string/satellite_image" />
 
                     </RelativeLayout>
 
