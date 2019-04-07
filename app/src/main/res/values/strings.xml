@@ -32,4 +32,5 @@
     <string name="example_field_name">Kopaida Wheat Field</string>
     <string name="example_temperature">17 °C</string>
     <string name="celcius_temperature">°C</string>
+    <string name="next_irrigation_field_example">Next Irrigation\nIn 2 days</string>
 </resources>

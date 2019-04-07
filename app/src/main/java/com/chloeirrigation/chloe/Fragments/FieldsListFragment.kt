@@ -64,6 +64,13 @@ class FieldsListFragment : Fragment() {
         field5.findViewById<ImageView>(R.id.fieldImage).setImageDrawable(
             context?.getDrawable(fields[4].fieldDrawable)
         )
+
+        val nextIrrigation = context?.getString(R.string.next_irrigation)
+        field1.findViewById<TextView>(R.id.nextIrrigationTextView).text = nextIrrigation + "\n in 2 days"
+        field2.findViewById<TextView>(R.id.nextIrrigationTextView).text = nextIrrigation + "\n in 3 days"
+        field3.findViewById<TextView>(R.id.nextIrrigationTextView).text = nextIrrigation + "\n in 2 days"
+        field4.findViewById<TextView>(R.id.nextIrrigationTextView).text = nextIrrigation + "\n in 5 days"
+        field5.findViewById<TextView>(R.id.nextIrrigationTextView).text = nextIrrigation + "\n in 4 days"
     }
 
     private fun setupFieldListeners() {
