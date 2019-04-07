@@ -43,14 +43,6 @@
                     android:layout_height="1dp"
                     android:background="@color/cardHeaderSeparatorGrey" />
 
-                <!-- TODO: Replace the image with an actual weather layout -->
-                <!--<ImageView-->
-                    <!--android:id="@+id/weather_card_imageview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:padding="5dp"-->
-                    <!--android:src="@drawable/weather_placeholder" />-->
-
                 <include layout="@layout/weather_layout"/>
 
             </LinearLayout>

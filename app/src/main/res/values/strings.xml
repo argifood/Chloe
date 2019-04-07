@@ -30,6 +30,6 @@
     <string name="sensor_data">Sensor Data</string>
     <string name="weather_data">Weather Data</string>
     <string name="example_field_name">Kopaida Wheat Field</string>
-    <string name="example_temperature">17 <sup>o</sup>C</string>
-    <string name="celcius_temperature"> <sup>o</sup>C</string>
+    <string name="example_temperature">17 °C</string>
+    <string name="celcius_temperature">°C</string>
 </resources>
