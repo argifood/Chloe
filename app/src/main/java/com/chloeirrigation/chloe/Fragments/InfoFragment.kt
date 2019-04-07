@@ -11,10 +11,7 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.chloeirrigation.chloe.ChloeApp
 import com.chloeirrigation.chloe.FieldActivity
-import com.chloeirrigation.chloe.Helpers.TAG
-import com.chloeirrigation.chloe.Helpers.intValue
-import com.chloeirrigation.chloe.Helpers.listValue
-import com.chloeirrigation.chloe.Helpers.stringValue
+import com.chloeirrigation.chloe.Helpers.*
 import com.chloeirrigation.chloe.Objects.Field
 import com.chloeirrigation.chloe.Objects.FieldData
 import com.chloeirrigation.chloe.R
@@ -22,6 +19,7 @@ import com.github.kittinunf.fuel.httpGet
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_info.*
 import kotlinx.android.synthetic.main.irrigation_status_layout.*
+import kotlinx.android.synthetic.main.weather_layout.*
 import me.akatkov.kotlinyjson.JSON
 import java.text.SimpleDateFormat
 import java.util.*
@@ -204,7 +202,45 @@ class InfoFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
 
     private fun setupWeather() {
-        //TODO: implement the weather
+        val url = "https://api.openweathermap.org/data/2.5/forecast?lat=${field.lat}&lon=${field.lon}&appid=6395bfdf79d06275382f2d4cf27fa375"
+        try {
+            url.httpGet().responseString { req, res, result ->
+                val jObj = JSON(result.get())
+
+                val weatherList = jObj["list"].listValue
+
+                val today = weatherList.firstOrNull()
+                today?.let { jObj ->
+                    val weather = jObj["weather"]["main"].stringValue
+                    val currTemp = (jObj["main"]["temp"].doubleValue - 273.0).toInt()
+                    val humidity = jObj["main"]["humidity"].doubleValue
+                    val wind = jObj["wind"]["speed"].doubleValue
+
+                    todayWeatherImageView.setImageDrawable(
+                        context?.getDrawable(
+                            when (weather) {
+                                "Rain" -> R.drawable.w_rain
+                                "Clouds" -> R.drawable.w_cloud
+                                else -> R.drawable.w_sun
+                            }
+                        )
+                    )
+
+                    todayTempTextView.text = "$currTemp C"
+                    todayWindTextView.text = "$wind km/h"
+                }
+
+                for (jObj in weatherList.drop(1)) {
+                    val timestamp = jObj["dt"].stringValue
+                    val weather = jObj["weather"]["main"].stringValue
+                    val temp = jObj["main"]["temp"].doubleValue
+                }
+
+                Log.d(TAG, "setupWeather: Fetched weather from api! ${weatherList.size}")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "setupWeather: Failed to fetch weather from API", e)
+        }
     }
 
     override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {

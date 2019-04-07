@@ -12,7 +12,8 @@
     <dimen name="chart_height">400dp</dimen>
     <dimen name="scrollViewBottomPadding">58dp</dimen>
     <dimen name="calendar_event_width">30dp</dimen>
-    <dimen name="weather_icon_large">120dp</dimen>
+    <dimen name="weather_icon_large_height">120dp</dimen>
+    <dimen name="weather_icon_large_width">100dp</dimen>
     <dimen name="weather_icon_small">50dp</dimen>
     <dimen name="weather_indicator_width">18dp</dimen>
 

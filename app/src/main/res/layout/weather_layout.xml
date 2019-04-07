@@ -9,8 +9,9 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/weather_icon_large"
-            android:layout_height="@dimen/weather_icon_large"
+            android:id="@+id/todayWeatherImageView"
+            android:layout_width="@dimen/weather_icon_large_width"
+            android:layout_height="@dimen/weather_icon_large_height"
             android:layout_gravity="center_vertical"
             android:src="@drawable/w_sun" />
 
@@ -23,7 +24,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/todayWeatherImageView"
+                android:id="@+id/todayWeatherTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/default_margin_double"
